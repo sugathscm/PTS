@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using PTS.Models;
+using PTS.UI.Models;
 
-namespace PTS
+namespace PTS.UI
 {
     public partial class Startup
     {

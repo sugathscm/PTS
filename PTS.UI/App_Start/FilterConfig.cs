@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace PTS
+namespace PTS.UI
 {
     public class FilterConfig
     {

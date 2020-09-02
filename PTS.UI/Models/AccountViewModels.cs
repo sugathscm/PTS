@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace PTS.Models
+namespace PTS.UI.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f8378f291c35424b8e60ac8a07cb436b" Name="Diagram1">
+        <EntityTypeShape EntityType="PTS_AmithaModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetRole" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUser" Width="1.5" PointX="8" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Gender" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.MaritialStatu" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Patient" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Title" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_MaritialStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_Title" ManuallyRouted="false" />
+        <AssociationConnector Association="PTS_AmithaModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.PatientClinicDay" Width="1.5" PointX="5.25" PointY="7.125" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientClinicDay_Patient" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

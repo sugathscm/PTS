@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace PTS.Models
+namespace PTS.UI.Models
 {
     public class IndexViewModel
     {

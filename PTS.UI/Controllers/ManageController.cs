@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using PTS.Models;
+using PTS.UI.Models;
 
-namespace PTS.Controllers
+namespace PTS.UI.Controllers
 {
     [Authorize]
     public class ManageController : Controller
