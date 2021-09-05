@@ -1,7 +1,35 @@
 ﻿@model PTS.DAL.Patient
 @{
-    ViewBag.Title = "Patient Details";
+    ViewBag.Title = "Patient";
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#List').DataTable({
+            "paging": true,
+            "ajax": {
+                "url": "/Patient/GetList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "Name" },
+                //{
+                //    "data": "Id", "searchable": false, "ordering": false,
+                //    "render": function (data, type, full, meta) {
+                //        return '<a class="btn btn-primary btn-xs" href="/Patient/Details/' + data + '">Edit</a>';
+                //    }
+                //},
+                //{
+                //    "data": "Id", "searchable": false, "ordering": false,
+                //    "render": function (data, type, full, meta) {
+                //        return '<a class="btn btn-primary btn-xs" href="/Patient/Report/' + data + '">Report</a>';
+                //    }
+                //},
+            ]
+        });
+    });
+</script>
 
 <div class="dashboard-ecommerce">
     <div class="container-fluid dashboard-content ">
@@ -12,170 +40,6 @@
         <!-- ============================================================== -->
         <!-- end pageheader  -->
         <!-- ============================================================== -->
-        <div class="border border-primary bg-actual-white m-b-20">
-            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10">
-                    <div class="row">
-                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Title</label>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    @Html.DropDownList("Title", (SelectList)ViewBag.TitleList, "Select Title", new { @class = "form-control" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">First Name</label>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "First Name", @class = "form-control" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Last Name</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Gender</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.DropDownList("GenderId", (SelectList)ViewBag.GenderList, "Select Gender", new { @class = "form-control" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Maritial Status</label>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    @Html.DropDownList("MaritialStatusId", (SelectList)ViewBag.MaritialStatuList, "Select Status", new { @class = "form-control" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Date Of Birth</label>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "DD/MM/YYYY" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Mobile</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "Mobile" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">NIC</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.NIC, new { @class = "form-control", @placeholder = "NIC" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Email</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Address Line 1</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control", @placeholder = "Address Line 1" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Address Line 2</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control", @placeholder = "Address Line 2" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">City</label>
-                                <div class="col-lg-12 col-sm-12">
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Clinic Visit Days</label>
-                                <label class="checkbox-inline m-r-10 ">
-                                    <input type="checkbox" value="" id="1" class="m-l-15 m-r-10">Monday
-                                </label>
-                                <label class="checkbox-inline m-r-10">
-                                    <input type="checkbox" value="" id="2" class="m-l-15 m-r-10">Tuesday
-                                </label>
-                                <label class="checkbox-inline m-r-10">
-                                    <input type="checkbox" value="" id="3" class="m-l-15 m-r-10">Wednesday
-                                </label>
-                                <label class="checkbox-inline m-r-10">
-                                    <input type="checkbox" value="" id="4" class="m-l-15 m-r-10">Thursday
-                                </label>
-                                <label class="checkbox-inline m-r-10">
-                                    <input type="checkbox" value="" id="5" class="m-l-15 m-r-10">Friday
-                                </label>
-                                <label class="checkbox-inline m-r-10">
-                                    <input type="checkbox" value="" id="6" class="m-l-15 m-r-10">Saturday
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
-                            <div class="form-group row">
-                                <label class="col-lg-12 col-sm-12 col-form-label text-small">Clinic Time</label>
-                                @*@Html.TextBoxFor(m => m.City, new { @class = "form-control timepicker", @placeholder = "City" })*@
-                                <select class="form-control m-r-15" style="width:25%">
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                    <option>13</option>
-                                    <option>14</option>
-                                    <option>15</option>
-                                    <option>16</option>
-                                </select>
-                                <select class="form-control" style="width:25%">
-                                    <option>00</option>
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>20</option>
-                                    <option>25</option>
-                                    <option>30</option>
-                                    <option>35</option>
-                                    <option>40</option>
-                                    <option>45</option>
-                                    <option>50</option>
-                                    <option>55</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="border border-primary bg-actual-white">
             <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20">
@@ -184,8 +48,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:100%">Name</th>
-                                    <th>Active</th>
-                                    <th></th>
+                                    @*<th></th>*@
                                 </tr>
                             </thead>
                         </table>
@@ -193,24 +56,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('.timepicker').timepicker({
-            timeFormat: 'h:mm p',
-            interval: 60,
-            minTime: '8',
-            maxTime: '6:00pm',
-            defaultTime: '8',
-            startTime: '8:00',
-            dynamic: true,
-            dropdown: true,
-            scrollbar: true
-        });
-    });
-</script>
-
 

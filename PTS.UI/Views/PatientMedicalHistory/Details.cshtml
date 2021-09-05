@@ -1,0 +1,1873 @@
+﻿@model PTS.UI.Models.PatientMedicalHistoryViewModel
+@{
+    ViewBag.Title = "Add/Edit Medical History";
+}
+
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+        <!-- ============================================================== -->
+        <!-- pageheader  -->
+        <!-- ============================================================== -->
+        @Html.Partial("_PageHeaderPartial")
+        <!-- ============================================================== -->
+        <!-- end pageheader  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+
+                @using (Html.BeginForm("SaveOrUpdate", "PatientMedicalHistory", FormMethod.Post, new { @class = "needs-validation", role = "form", enctype = "multipart/form-data", onsubmit = "return readValues();" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.Id, new { @name = "Id" })
+                    <input type="hidden" name="comorbidityArray" value="" id="comorbidityArray" />
+                    <input type="hidden" name="familyHistoryArray" value="" id="familyHistoryArray" />
+                    <input type="hidden" name="complicationsArray" value="" id="complicationsArray" />
+                    <input type="hidden" name="catscoreArray" value="" id="catscoreArray" />
+                    <input type="hidden" name="investigationArray" value="" id="investigationArray" />
+                    <input type="hidden" name="investigationTextArray" value="" id="investigationArray" />
+
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Patient Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Clinical History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Physical Examination</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-visithistory-tab" data-toggle="pill" href="#pills-visithistory" role="tab" aria-controls="pills-visithistory" aria-selected="false">Visit History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-report-tab" data-toggle="pill" href="#pills-report" role="tab" aria-controls="pills-report" aria-selected="false">Reports(Imaging)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-investigation-tab" data-toggle="pill" href="#pills-investigation" role="tab" aria-controls="pills-investigation" aria-selected="false">Investigation &amp; Examination</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-resources-tab" data-toggle="pill" href="#pills-resources" role="tab" aria-controls="pills-resources" aria-selected="false">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-vaccinationhistory-tab" data-toggle="pill" href="#pills-vaccinationhistory" role="tab" aria-controls="pills-vaccinationhistory" aria-selected="false">Vaccination History</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                        <div class="row">
+                                            <label class="col-lg-1 col-md-12 col-sm-12 col-form-label text-small ">Patient</label>
+                                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                                @Html.DropDownList("PatientId", (SelectList)ViewBag.PatientList, "New Patient", new { @class = "form-control select" })
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Title</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.DropDownList("TitleId", (SelectList)ViewBag.TitleList, "Select Title", new { @class = "form-control select" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">First Name</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Last Name</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Gender</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.DropDownList("GenderId", (SelectList)ViewBag.GenderList, "Select Gender", new { @class = "form-control select" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Maritial Status</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.DropDownList("MaritialStatusId", (SelectList)ViewBag.MaritialStatuList, "Select Status", new { @class = "form-control select" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Date Of Birth</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.DOB, new { @class = "form-control", @placeholder = "DD/MM/YYYY" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Mobile</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.Mobile, new { @class = "form-control", @placeholder = "Mobile" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">NIC</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.NIC, new { @class = "form-control", @placeholder = "NIC", @maxlength = 10 })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Email</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Address Line 1</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.AddressLine1, new { @class = "form-control", @placeholder = "Address Line 1" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Address Line 2</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.AddressLine2, new { @class = "form-control", @placeholder = "Address Line 2" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">City</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.City, new { @class = "form-control", @placeholder = "City" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Emergency Contact Name</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.EmergencyContactName, new { @class = "form-control", @placeholder = "Address Line 1" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Emergency Contact No</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.EmergencyContactNo, new { @class = "form-control", @placeholder = "Address Line 2" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Designation</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.Designation, new { @class = "form-control", @placeholder = "City" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Clinic Visit Days</label>
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="1" class="m-l-15 m-r-10">Monday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="2" class="m-l-15 m-r-10">Tuesday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="3" class="m-l-15 m-r-10">Wednesday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="4" class="m-l-15 m-r-10">Thursday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="5" class="m-l-15 m-r-10">Friday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="6" class="m-l-15 m-r-10">Saturday
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Time</label>
+                                                    @*@Html.TextBoxFor(m => m.City, new { @class = "form-control timepicker", @placeholder = "City" })*@
+                                                    <select class="form-control m-r-15">
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                        <option>13</option>
+                                                        <option>14</option>
+                                                        <option>15</option>
+                                                        <option>16</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">&nbsp;</label>
+                                                    <select class="form-control">
+                                                        <option>00</option>
+                                                        <option>10</option>
+                                                        <option>15</option>
+                                                        <option>20</option>
+                                                        <option>25</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                        <option>40</option>
+                                                        <option>45</option>
+                                                        <option>50</option>
+                                                        <option>55</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Dyspnoea</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("DyspnoeaId", (SelectList)ViewBag.LogicalList, "Select Dyspnoea", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">mMRC Grade</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("mMRCGradeId", (SelectList)ViewBag.mMRCGradeList, "Select mMRC Grade", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                        <div class="form-group row">
+                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">No. of exacerbation per last year</label>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <select class="form-control" id="NoOfExacerbationPerLastYear" name="NoOfExacerbationPerLastYear">
+                                    <option>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>*@
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>CAT Score</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                        @Html.Partial("_CATScore", Model.CATScoreList)
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                        <h5>Co-morbidities</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var Comorbidity in ViewBag.ComorbidityList)
+                                    {
+                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="@Comorbidity.Value" id="@Comorbidity.Value" class="m-l-15 m-r-10 comorbidity">@Comorbidity.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                <div class="form-group row">
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="0" class="m-l-15 m-r-10">Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-11 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                @Html.TextBoxFor(m => m.ComorbidityOthers, new { @class = "form-control", @placeholder = "" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Smoking and exposure history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Smoking History</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("SmokingHistoryId", (SelectList)ViewBag.SmokingHistoryList, "Select Smoking History", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Date Stopped</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHDateStopped, new { @class = "form-control", @placeholder = "MM/DD/YYYY" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Cig. Smoked a day</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHSmokedADay, new { @class = "form-control smoking-history", @placeholder = "Cig. Smoked a day" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">No. of years smoked</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHNoOfYearsSmoked, new { @class = "form-control smoking-history", @placeholder = "No. of years smoked" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Pack Years</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHPackYears, new { @class = "form-control", @placeholder = "Pack Years", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Environmental Tobacco Smoking (ETS)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.ETS, new { @class = "form-control", @placeholder = "Environmental Tobacco Smoking (ETS)" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Substance abuse: Specify if any</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SubstanceAbuse, new { @class = "form-control", @placeholder = "Substance abuse" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Biomass fuel smoke exposure - Duration in years</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.BiomassFuelSmokeExposure, new { @class = "form-control", @placeholder = "Biomass fuel smoke exposure" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Occupation at present</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.OccupationAtPresent, new { @class = "form-control", @placeholder = "Occupation at present" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Previous occupations</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.PreviousOccupations, new { @class = "form-control", @placeholder = "Previous occupations" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Family history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var FamilyHistory in ViewBag.FamilyHistoryList)
+                                    {
+                                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="@FamilyHistory.Value" id="@FamilyHistory.Value" class="m-l-15 m-r-10 FamilyHistory">@FamilyHistory.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                <div class="form-group row">
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="0" class="m-l-15 m-r-10">Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                @Html.TextBoxFor(m => m.FamilyHistoryOthers, new { @class = "form-control", @placeholder = "" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Allergic history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Drugs</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.AllergicHistoryDrugs, new { @class = "form-control", @placeholder = "Drugs", @rows = "2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Others</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.AllergicHistoryOthers, new { @class = "form-control", @placeholder = "Others", @rows = "2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Medication history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">COPD medication</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.MedicationHistoryCOPD, new { @class = "form-control", @placeholder = "COPD medication" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Non-COPD medication</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.MedicationHistoryNonCOPD, new { @class = "form-control", @placeholder = "Non-COPD medication" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Vaccination history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var VaccinationHistory in ViewBag.VaccinationHistoryList)
+                                    {
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@VaccinationHistory.Value" class="m-l-15 m-r-10">@VaccinationHistory.Text
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="" id="@("date-" + VaccinationHistory.Value)" class="form-control vaccination-history" placeholder="MM/DD/YYYY">
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <b>Complications</b>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var Complication in ViewBag.ComplicationList)
+                                    {
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="@Complication.Value" id="@Complication.Value" class="m-l-15 m-r-10 Complications">@Complication.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12  m-b-20 ml-0" style="margin-left: -8px!important;">
+                                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                <div class="form-group row">
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="0" class="m-l-15 m-r-10">Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                @Html.TextBoxFor(m => m.ComplicationOther, new { @class = "form-control", @placeholder = "" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                        <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>Disease severity</b>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>FEV1 Staging List</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            @Html.DropDownList("FEV1StagingId", (SelectList)ViewBag.FEV1StagingList, "Select FEV1 Stage", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">mMRC Grade</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-1 col-lg-1 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <div class="col-lg-10 col-md-12 col-sm-12 mMRC-grade">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">CAT Score</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-1 col-lg-1 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <div class="col-lg-10 col-md-12 col-sm-12 CAT-Score">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Exacerbation History</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    @Html.DropDownList("ExacerbationHistoryId", (SelectList)ViewBag.ExacerbationHistoryList, "Select Exacerbation History", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small"><b>Combined Assessment</b></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-1 col-lg-1 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <div class="col-lg-10 col-md-12 col-sm-12 CombinedAssessment font-bold font-16">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <div class="col-lg-10 col-md-12 col-sm-12"><b>CAT Score Interpretation</b></div>
+                                                <div class="col-lg-10 col-md-12 col-sm-12 CATScoreInt">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>Excerbation Risk List</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            @Html.DropDownList("GOLDFEV1StagingId", (SelectList)ViewBag.GOLDFEV1StagingList, "Select Excerbation Risk", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>BODE Index</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            Variable
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            Points
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            Score
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>BMI (Kg/m2)</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            @Html.DropDownList("BODEIndexVariable1Id", (SelectList)ViewBag.BODEIndexVariable1List, "Select BMI (Kg/m2)", new { @class = "form-control BODEIndexVariable", @id = "1" })
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div id="Score-1">0</div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>FEV1 % predicted</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            @Html.DropDownList("BODEIndexVariable2Id", (SelectList)ViewBag.BODEIndexVariable2List, "Select FEV1 % predicted", new { @class = "form-control BODEIndexVariable", @id = "2" })
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div id="Score-2">0</div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>mMRC scale</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            @Html.DropDownList("BODEIndexVariable3Id", (SelectList)ViewBag.BODEIndexVariable3List, "Select mMRC scale", new { @class = "form-control BODEIndexVariable", @id = "3" })
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div id="Score-3">0</div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                            <b>6MWT distance (m)</b>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            @Html.DropDownList("BODEIndexVariable4Id", (SelectList)ViewBag.BODEIndexVariable4List, "Select 6MWT distance (m)", new { @class = "form-control BODEIndexVariable", @id = "4" })
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div id="Score-4">0</div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-0 text-center">
+                                            Total Score
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                            <div id="BODEIndexTotal"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    @foreach (var PhysicalExamination in ViewBag.PhysicalExaminationList)
+                                    {
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@PhysicalExamination.Value" class="m-l-15 m-r-10">@PhysicalExamination.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">BMI (Kg/m<sup>2</sup>)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.BMI, new { @class = "form-control", @placeholder = "BMI" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Jugular Venous Pulse</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("JugularVenousPulseId", (SelectList)ViewBag.LogicalList, "Select Jugular Venous Pulse", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Pulse Rate (/min)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.PulseRate, new { @class = "form-control", @placeholder = "Pulse Rate" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Blood Presure (/min)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.BloodPressure, new { @class = "form-control", @placeholder = "Blood Presure" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Cardiac Auscultation (S1)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.CardiacAuscultationS1, new { @class = "form-control", @placeholder = "S1" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">A2/P2</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.CardiacAuscultationA2P2, new { @class = "form-control", @placeholder = "A2/P2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Pulmonary Aucscultation</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.PulmonaryAucscultation, new { @class = "form-control", @placeholder = "Pulmonary Aucscultation" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Notes</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.PulmonaryAucscultation, new { @class = "form-control", @placeholder = "Notes", @rows = "5" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-report" role="tabpanel" aria-labelledby="pills-report-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0 m-t-10">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Imaging</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <input type="file" multiple="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-visithistory" role="tabpanel" aria-labelledby="pills-visithistory-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    @if (ViewBag.VisitHistory != null)
+                                    {
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.Date)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 border text-center m-10">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 border text-center m-10">
+                                                    @DateTime.Now.ToShortDateString()
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        1. Compalaints / Assessment
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.Compalaints)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        2. Systems of Exacerbation<br />
+                                                        Change in : Dyspnea / Cough / Sputum volume &amp; character / Fever
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SystemsOfExacerbation)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        3. Dyspnea (mMRC 0-4)
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.mMRC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        4. Ankle oedema
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.AnkleOedema)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        5. Blood pressure
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.BloodPressure)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        6. Weight / BMI
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.WeightBMI)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        7. PEFR
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.PEFR)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        8. BODE Index / CAT Score
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.BODEIndex)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        9. 6 min Walk Test - SpO2 - At rest
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SixminWalkTestSpO2Atrest)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp; 6 min Walk Test - SpO2 - After 6 min walk
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SixminWalkTestSpO2After6minwalk)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;6 min Walk Test - Distance walked (m)
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SixminWalkTestDistanceWalked)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        10. Spirometry - FEV1 (%)
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFEV1)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry - FEV1 (%) predicted
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFEV1Predicted)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry - FVC (%)
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFVC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry - FVC (%) predicted
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFVC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry - FEV1/FVC (%)
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFEV1FVC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry -  FEF 25% of FVC
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFEF25ofFVC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry -  FEF 50% of FVC
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFEF50ofFVC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spirometry -  FEF 75% of FVC
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SpirometryFEF75ofFVC)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post bronchodilator FEV1
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.PostBronchodilatorFEV1)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        11. Pulmonary Rehabilitation - Smoking Status
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.PulmonaryRehabilitationSmokingStatus)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pulmonary Rehabilitation - Exercise Training
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.PulmonaryRehabilitationExerciseTraining)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pulmonary Rehabilitation - Nutritional advice
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.PulmonaryRehabilitationNutritionalAdvice)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        12. Adherence to Treatment - Compliance
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.AdherenceToTreatmentCompliance)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adherence to Treatment - Technique
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.AdherenceToTreatmentTechnique)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        13. Health Education
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.HealthEducation)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        14. Smoking Status
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.SmokingStatus)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        15. Depression assessed by PHQ-9
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.DepressionAssessedByPHQ9)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border p-l-20">
+                                                    <div class="form-group row">
+                                                        16. Vaccination
+                                                    </div>
+                                                </div>
+                                                @foreach (var value in ViewBag.VisitHistory.Vaccination)
+                                                {
+                                                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                        @value
+                                                    </div>
+                                                }
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0 border">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-investigation" role="tabpanel" aria-labelledby="pills-investigation-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0 m-t-10">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Investigation &amp; Examination</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-0">
+                                        @*<button id="PrintInvestigations">Print</button>*@
+                                        <input type="button" id="PrintInvestigations" value="Print" />
+                                        <div class="panel-group" id="accordion">
+                                            @foreach (var investigationType in ViewBag.InvestigationTypeList)
+                                            {
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href=@(String.Format("{0}{1}", "#collapse", investigationType.Id))>
+                                                                @investigationType.Name
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id=@(String.Format("{0}{1}", "collapse", investigationType.Id)) class="panel-collapse collapse in">
+                                                        <div class="panel-body">
+                                                            @{
+                                                                IEnumerable<PTS.DAL.Investigation> InvestigationList = ViewBag.InvestigationList as IEnumerable<PTS.DAL.Investigation>;
+
+                                                                var investigationListByTypeId = InvestigationList.Where(i => i.InvestigationTypeId == investigationType.Id);
+
+                                                                foreach (var investigation in investigationListByTypeId)
+                                                                {
+                                                                    <div class="row p-b-10">
+                                                                        <div class="col-lg-1 col-md-1 col-sm-12">
+                                                                            <input id="@investigation.Id" class="investigation" type="checkbox" value="@investigation.Name" />
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                                                            @investigation.Name
+                                                                        </div>
+                                                                        <div class="col-lg-7 col-md-7 col-sm-12">
+                                                                            <input type="text" id="investigation-text-@investigation.Id" class="form-control investigation-text" />
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-0" id="printThis">
+                                        <div class="row m-10 print-report-data border p-1">
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-10"><b>Investigations List</b></div>
+                                        </div>
+                                        <div class="row m-10 print-report-data border p-1">
+                                            <div id="investigationNames" class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-resources" role="tabpanel" aria-labelledby="pills-resources-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0 m-t-10">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Resources</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-0">
+                                        <h5>Chronic Obstructive Pulmonary Disease</h5>
+                                        @Html.ActionLink("Chronic Obstructive Pulmonary Disease - English", "Chronic Obstructive Pulmonary Disease-English.pdf", "MedicalResources", null, new { @class = "btn btn-warning", @target = "_blank" })<br /><br />
+                                        @Html.ActionLink("Chronic Obstructive Pulmonary Disease - Sinhala", "Chronic Obstructive Pulmonary Disease-Sinhala.pdf", "MedicalResources", null, new { @class = "btn btn-warning", @target = "_blank" })<br />
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-0">
+                                        <h5>COPD Emergency Action Plan</h5>
+                                        @Html.ActionLink("COPD Emergency Action Plan - English", "COPD_Emergency_Action_Plan-English.pdf", "MedicalResources", null, new { @class = "btn btn-success", @target = "_blank" })<br /><br />
+                                        @Html.ActionLink("COPD Emergency Action Plan - Sinhala", "COPD_Emergency_Action_Plan-Sinhala.pdf", "MedicalResources", null, new { @class = "btn btn-success", @target = "_blank" })<br /><br />
+                                        @Html.ActionLink("COPD Emergency Action Plan - Tamil", "COPD_Emergency_Action_Plan-Tamil.pdf", "MedicalResources", null, new { @class = "btn btn-success", @target = "_blank" })<br />
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-0">
+                                        @Html.ActionLink("COPD Population Screener", "COPD.pdf", "MedicalResources", null, new { @class = "btn btn-warning", @target = "_blank" })<br /><br />
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-0">
+                                        @Html.ActionLink("Patient Health Questionnaire (PHQ-9)", "PHQ.pdf", "MedicalResources", null, new { @class = "btn btn-warning", @target = "_blank" })<br /><br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-vaccinationhistory" role="tabpanel" aria-labelledby="pills-vaccinationhistory-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0 m-t-10">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Vaccination History</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Vaccine</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("SmokingHistoryId", (SelectList)ViewBag.SmokingHistoryList, "Select Vaccine", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Date</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <input type="date" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-0">
+                            <div class="form-row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <input type="submit" class="btn btn-primary" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="investigationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Investigations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Preview">
+            </div>
+            <div class="modal-footer">
+                <button id="btnPrint" type="button" class="btn btn-primary">Print</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //function PrintDiv() {
+    //    var divdata = document.getElementById("investigationNames").innerHTML;
+    //    var printWin = window.open('', '', 'top=500,height=800,width=800');
+    //    printWin.document.write('<html><head><title>Print Content</title>');
+    //    printWin.document.write('</head><body >');
+    //    printWin.document.write(divdata);
+    //    printWin.document.write('</body></html>');
+    //    printWin.document.close();
+    //    printWin.print();
+    //}
+
+    $(document).ready(function () {
+        var comorbidityArray = [];
+        var familyHistoryArray = [];
+        var complicationsArray = [];
+        var catscoreArray = [];
+        var investigationArray = [];
+        var investigationTextArray = [];
+
+        $(".BODEIndexVariable").change(function (e) {
+            var id = $(this).attr("id");
+            $("#Score-" + id).html($(this).val());
+            setBODEIndexTotal();
+        });
+
+        $("#PrintInvestigations").click(function (e) {
+            //printInvestigationList(e);
+            //PrintDiv();
+            $("#printThis").printThis();
+        });
+
+        $(".past-smoker").hide();
+
+        $('.select').select2({
+            selectOnClose: true
+        });
+
+        $("#SHDateStopped").datepicker({
+            uiLibrary: 'bootstrap',
+            "dateFormat": "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:+00"
+        });
+
+        $("#Patient_DOB").datepicker({
+            uiLibrary: 'bootstrap',
+            "dateFormat": "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:+00"
+        });
+
+        $(".vaccination-history").datepicker({
+            uiLibrary: 'bootstrap',
+            "dateFormat": "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:+00"
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 60,
+            minTime: '8',
+            maxTime: '6:00pm',
+            defaultTime: '8',
+            startTime: '8:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $('#TitleId').change(function () {
+            var obj = $(this).val();
+            console.log(obj);
+            if (obj == 1 || obj == 6) {
+                $('#GenderId').val(1).select2();
+            }
+            else {
+                $('#GenderId').val("").select2();
+            }
+        });
+
+        $('#PatientId').change(function () {
+            var obj = { id: $(this).val() };
+            $.ajax({
+                url: "/PatientMedicalHistory/GetPatient",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                success: function (result) {
+                    console.log(result);
+                    $("#Patient_FirstName").val(result.FirstName);
+                    $("#Patient_LastName").val(result.LastName);
+                    $("#TitleId").val(result.TitleId).select2();
+                    $("#GenderId").val(result.GenderId).select2();
+                    $("#Patient_Mobile").val(result.Mobile);
+                    $("#MaritialStatusId").val(result.MaritialStatusId).select2();
+                    $("#Patient_DOB").val(result.DOB);
+                    $("#Patient_NIC").val(result.NIC);
+                    $("#Patient_Email").val(result.Email);
+                    $("#Patient_Height").val(result.Email);
+                    $("#Patient_Weight").val(result.Email);
+                },
+                error: function (err) {
+                    if (err.responseText == "") {
+                        $("#Patient_FirstName").val('');
+                        $("#Patient_LastName").val('');
+                        $("#TitleId").val('');
+                        $("#GenderId").val('');
+                        $("#Patient_Mobile").val('');
+                        $("#MaritialStatusId").val('');
+                        $("#Patient_NIC").val('');
+                        $("#Patient_DOB").val('');
+                        $("#Patient_Email").val('');
+                        $("#Patient_Height").val('');
+                        $("#Patient_Weight").val('');
+                    }
+                    else
+                        alert(err.responseText);
+                }
+            });
+        });
+
+        $("#SmokingHistoryId").change(function () {
+            id = $(this).val();
+
+            if (id == 4) {
+                $(".past-smoker").show();
+            }
+            else {
+                $(".past-smoker").hide();
+            }
+        });
+
+        $(".smoking-history").change(function () {
+            $('#SHPackYears').val(calculatePackYears());
+        });
+
+        $('#mMRCGradeId').change(function () {
+            var data = $('#mMRCGradeId option:selected').text();
+            //console.log(data);
+            $('.mMRC-grade').html(data.split('-')[0]);
+            setCombinedAssessmentValue();
+        });
+
+        $('#ExacerbationHistoryId').change(function () {
+            setCombinedAssessmentValue();
+        });
+
+        $('.comorbidity').change(function () {
+            if ($(this).is(":checked")) {
+                comorbidityArray.push($(this).val());
+            }
+            else {
+                comorbidityArray = $('#comorbidityArray').val().split(',');
+                const index = comorbidityArray.indexOf($(this).val());
+                if (index > -1) {
+                    comorbidityArray.splice(index, 1);
+                }
+            }
+
+            $('#comorbidityArray').val(comorbidityArray);
+
+            console.log($('#comorbidityArray').val());
+        });
+
+        $('.FamilyHistory').change(function () {
+            if ($(this).is(":checked")) {
+                familyHistoryArray.push($(this).val());
+            }
+            else {
+                familyHistoryArray = $('#familyHistoryArray').val().split(',');
+                const index = familyHistoryArray.indexOf($(this).val());
+                if (index > -1) {
+                    familyHistoryArray.splice(index, 1);
+                }
+            }
+
+            $('#familyHistoryArray').val(familyHistoryArray);
+
+            console.log($('#familyHistoryArray').val());
+        });
+
+        $('.Complications').change(function () {
+            if ($(this).is(":checked")) {
+                complicationsArray.push($(this).val());
+            }
+            else {
+                complicationsArray = $('#complicationsArray').val().split(',');
+                const index = complicationsArray.indexOf($(this).val());
+                if (index > -1) {
+                    complicationsArray.splice(index, 1);
+                }
+            }
+
+            $('#complicationsArray').val(complicationsArray);
+
+            console.log($('#complicationsArray').val());
+        });
+
+        $(".cat-score").slider({
+            value: 0,
+            min: 0,
+            max: 5,
+            step: 1,
+            slide: function (event, ui) {
+                $("#amount-" + this.id).html(ui.value);
+            }
+        });
+
+        $(".cat-score").on("slidestop", function (event, ui) {
+            //console.log(ui.value);
+            var score = 0;
+            $('.cat-score').each(function (i, obj) {
+                score = parseInt(score) + parseInt($("#amount-" + obj.id).html());
+            });
+
+            $('.CAT-Score').html(score);
+            var id = $(this).attr("id");
+
+            catscoreArray = $('#catscoreArray').val().split(',');
+            //console.log("================");
+            //console.log(catscoreArray);
+            //console.log("----------");
+            $.each(catscoreArray, function (key, value) {
+                if (value != null) {
+                    if (value.split('-')[0] == id) {
+                        const index = catscoreArray.indexOf(value);
+                        if (index > -1) {
+                            catscoreArray.splice(index, 1);
+                        }
+                    }
+                }
+            });
+            //console.log("----------");
+
+            catscoreArray.push($(this).attr("id") + "-" + ui.value);
+            //console.log(catscoreArray);
+            catscoreArray = catscoreArray.filter(item => item);
+            //console.log(catscoreArray);
+            $('#catscoreArray').val(catscoreArray);
+
+            //Display CAT Score Intepretation
+            DisplayCATScoreIntepretation(score);
+            setCombinedAssessmentValue();
+        });
+
+        $(".investigation").change(function () {
+
+            var id = $(this).val();
+
+            investigationArray = $('#investigationArray').val().split(',');
+
+            if ($(this).prop("checked") == true) {
+                investigationArray.push(id);
+            }
+            else {
+                $.each(investigationArray, function (key, value) {
+                    if (value == id) {
+                        console.log("m");
+                        const index = investigationArray.indexOf(value);
+                        console.log(index);
+                        if (index > -1) {
+                            investigationArray.splice(index, 1);
+                        }
+                    }
+                });
+            }
+
+            investigationArray = investigationArray.filter(item => item);
+            //console.log(investigationArray);
+            var controlId = $(this).attr("id");
+            //console.log(controlId);
+            $('#investigationArray').val(investigationArray);
+            var investigationArrayPrint = $("#investigationNames").html();
+
+            //$.each(investigationArray, function (key, value) {
+            investigationArrayPrint += "<tr><td style='border-right:1px solid #000;padding-right:10px'><span>" + id + "</span></td><td><span style='padding-left:10px' id='investigation-text-" + controlId + "-print'></span></td></tr>";
+            //});
+            //var investigationArrayPrint = investigationArray.join(" <br> ");
+            $("#investigationNames").html(investigationArrayPrint);
+
+        });
+
+        $(".investigation-text").change(function () {
+            var id = $(this).attr("id");
+            $("#" + id + "-print").html($(this).val());
+        });
+
+        function DisplayCATScoreIntepretation(score) {
+            var obj = { score: score };
+            $.ajax({
+                url: "/CATScoreIntepretation/GetByCATScore",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                success: function (result) {
+                    data = result.data;
+                    //console.log(data.DetailList);
+                    var html = "<table class='table table-striped table-bordered'>";
+                    html = html + "<tr><td>" + data.Name + "</td></tr>";
+                    html = html + "<tr><td>" + data.Text + "</td></tr>";
+                    html = html + "<tr><td>" + data.DetailList + "</td></tr>";
+                    html = html + "</table>";
+                    $('.CATScoreInt').html(html);
+                },
+                error: function (err) {
+
+                }
+            });
+        }
+
+        function calculatePackYears() {
+            years = $('#SHNoOfYearsSmoked').val();
+            cigs = $('#SHSmokedADay').val();
+            return ((years * cigs) / 20);
+        }
+
+        function readValues() {
+            var email = $('#Email').val();
+            if (IsEmail(email))
+                return true;
+            else {
+                alert("Please check email address");
+                $('#Email').focus();
+            }
+        }
+
+        function IsEmail(email) {
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(email)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function setCombinedAssessmentValue() {
+            mMRC = $('.mMRC-grade').html();
+            CATScore = $('.CAT-Score').html();
+            ExacerbationHistory = $('#ExacerbationHistoryId').val();
+
+            console.log(mMRC);
+            console.log(CATScore);
+            console.log(ExacerbationHistory);
+
+            if (mMRC != "" && CATScore != "" && ExacerbationHistory != "") {
+                console.log("values");
+                if (ExacerbationHistory == 1) {
+                    console.log("ExacerbationHistory == 1")
+                    if ((mMRC == 0) || (mMRC == 1)) {
+                        console.log("mMRC - 0 or 1");
+                        if (CATScore < 10) {
+                            console.log("CATScore - <10");
+                            $('.CombinedAssessment').html('C');
+                        }
+                    }
+                    else {
+                        if (CATScore > 9) {
+                            $('.CombinedAssessment').html('D');
+                        }
+                    }
+                }
+                else {
+                    console.log("ExacerbationHistory == 0")
+                    if ((mMRC == 0) || (mMRC == 1)) {
+                        if (CATScore < 10) {
+                            $('.CombinedAssessment').html('A');
+                        }
+                    }
+                    else {
+                        if (CATScore > 9) {
+                            $('.CombinedAssessment').html('B');
+                        }
+                    }
+                }
+            }
+        }
+
+        function printInvestigationList(e) {
+            e.preventDefault();
+
+            var options = {
+                "backdrop": "static",
+                keyboard: true
+            };
+            var obj = { investigations: $('#investigationArray').val() };
+            $.ajax({
+                url: "/PatientMedicalHistory/GetInvestigations",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                success: function (result) {
+                    data = result.data;
+                    $('#investigationModal').html(data);
+                    $('#investigationModal').modal(options);
+                    $('#investigationModal').modal('show');
+                },
+                error: function (err) {
+
+                }
+            });
+        }
+
+        function setBODEIndexTotal() {
+            var total = 0;
+
+            for (i = 1; i < 5; i++) {
+                total = total + parseInt($("#Score-" + i).html());
+            }
+
+            $("#BODEIndexTotal").html(total);
+        }
+    });
+</script>
+

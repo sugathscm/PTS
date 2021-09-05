@@ -1,7 +1,649 @@
-﻿
+﻿@model PTS.UI.Models.MedicalHistoryViewModel
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Patient Details";
 }
 
-<h2>Details</h2>
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+        <!-- ============================================================== -->
+        <!-- pageheader  -->
+        <!-- ============================================================== -->
+        @Html.Partial("_PageHeaderPartial")
+        <!-- ============================================================== -->
+        <!-- end pageheader  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
 
+                @using (Html.BeginForm("SaveOrUpdate", "Patient", FormMethod.Post, new { @class = "needs-validation", role = "form", enctype = "multipart/form-data", onsubmit = "return readValues();" }))
+                {
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Patient Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Clinical History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Physical Examination</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Title</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.DropDownList("Title", (SelectList)ViewBag.TitleList, "Select Title", new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">First Name</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Last Name</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Gender</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.DropDownList("GenderId", (SelectList)ViewBag.GenderList, "Select Gender", new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Maritial Status</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.DropDownList("MaritialStatusId", (SelectList)ViewBag.MaritialStatuList, "Select Status", new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Date Of Birth</label>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.DOB, new { @class = "form-control", @placeholder = "DD/MM/YYYY" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Mobile</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.Mobile, new { @class = "form-control", @placeholder = "Mobile" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">NIC</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.NIC, new { @class = "form-control", @placeholder = "NIC" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Email</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Address Line 1</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.AddressLine1, new { @class = "form-control", @placeholder = "Address Line 1" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Address Line 2</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.AddressLine2, new { @class = "form-control", @placeholder = "Address Line 2" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">City</label>
+                                                    <div class="col-lg-12 col-sm-12">
+                                                        @Html.TextBoxFor(m => m.Patient.City, new { @class = "form-control", @placeholder = "City" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Clinic Visit Days</label>
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="1" class="m-l-15 m-r-10">Monday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="2" class="m-l-15 m-r-10">Tuesday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="3" class="m-l-15 m-r-10">Wednesday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="4" class="m-l-15 m-r-10">Thursday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="5" class="m-l-15 m-r-10">Friday
+                                                    </label>
+                                                    <label class="checkbox-inline m-r-10">
+                                                        <input type="checkbox" value="" id="6" class="m-l-15 m-r-10">Saturday
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-12 col-sm-12 col-form-label text-small">Clinic Time</label>
+                                                    @*@Html.TextBoxFor(m => m.City, new { @class = "form-control timepicker", @placeholder = "City" })*@
+                                                    <select class="form-control m-r-15" style="width:25%!important">
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                        <option>13</option>
+                                                        <option>14</option>
+                                                        <option>15</option>
+                                                        <option>16</option>
+                                                    </select>
+                                                    <select class="form-control" style="width:25%">
+                                                        <option>00</option>
+                                                        <option>10</option>
+                                                        <option>15</option>
+                                                        <option>20</option>
+                                                        <option>25</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                        <option>40</option>
+                                                        <option>45</option>
+                                                        <option>50</option>
+                                                        <option>55</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Dyspnoea</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("DyspnoeaId", (SelectList)ViewBag.LogicalList, "Select Dyspnoea", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">mMRC Grade</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.mMRCGrade, new { @class = "form-control", @placeholder = "mMRC Grade" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">CAT Score</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.CATScore, new { @class = "form-control", @placeholder = "CAT Score" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">No. of exacerbation per last year</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.NoOfExacerbationPerLastYear, new { @class = "form-control", @placeholder = "No. of exacerbation per last year" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Co-morbidities</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var Comorbidity in ViewBag.ComorbidityList)
+                                    {
+                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@Comorbidity.Value" class="m-l-15 m-r-10">@Comorbidity.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                <div class="form-group row">
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="0" class="m-l-15 m-r-10">Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-11 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                @Html.TextBoxFor(m => m.ComorbidityOthers, new { @class = "form-control", @placeholder = "" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Smoking and exposure history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Smoking History</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("SmokingHistoryId", (SelectList)ViewBag.SmokingHistoryList, "Select Smoking History", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Date Stopped</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHDateStopped, new { @class = "form-control", @placeholder = "MM/DD/YYYY" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Cig. Smoked a day</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHSmokedADay, new { @class = "form-control smoking-history", @placeholder = "Cig. Smoked a day" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">No. of years smoked</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHNoOfYearsSmoked, new { @class = "form-control smoking-history", @placeholder = "No. of years smoked" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0 past-smoker">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Pack Years</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SHPackYears, new { @class = "form-control", @placeholder = "Pack Years", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Environmental Tobacco Smoking (ETS)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.ETS, new { @class = "form-control", @placeholder = "Environmental Tobacco Smoking (ETS)" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Substance abuse: Specify if any</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.SubstanceAbuse, new { @class = "form-control", @placeholder = "Substance abuse" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Biomass fuel smoke exposure - Duration in years</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.BiomassFuelSmokeExposure, new { @class = "form-control", @placeholder = "Biomass fuel smoke exposure" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Occupation at present</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.OccupationAtPresent, new { @class = "form-control", @placeholder = "Occupation at present" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Previous occupations</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.PreviousOccupations, new { @class = "form-control", @placeholder = "Previous occupations" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Family history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var FamilyHistory in ViewBag.FamilyHistoryList)
+                                    {
+                                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@FamilyHistory.Value" class="m-l-15 m-r-10">@FamilyHistory.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                <div class="form-group row">
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="0" class="m-l-15 m-r-10">Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                @Html.TextBoxFor(m => m.FamilyHistoryOthers, new { @class = "form-control", @placeholder = "" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Allergic history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Drugs</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.AllergicHistoryDrugs, new { @class = "form-control", @placeholder = "Drugs" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Others</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.AllergicHistoryOthers, new { @class = "form-control", @placeholder = "Others" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Medication history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">COPD medication</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.MedicationHistoryCOPD, new { @class = "form-control", @placeholder = "COPD medication" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Non-COPD medication</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextAreaFor(m => m.MedicationHistoryNonCOPD, new { @class = "form-control", @placeholder = "Non-COPD medication" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <h5>Vaccination history</h5>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var VaccinationHistory in ViewBag.VaccinationHistoryList)
+                                    {
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@VaccinationHistory.Value" class="m-l-15 m-r-10">@VaccinationHistory.Text
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="" id="@("date-" + VaccinationHistory.Value)" class="form-control vaccination-history" placeholder="MM/DD/YYYY">
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                    <div class="col-xl-12 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <b>Complications</b>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    @foreach (var Complication in ViewBag.ComplicationList)
+                                    {
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@Complication.Value" class="m-l-15 m-r-10">@Complication.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                <div class="form-group row">
+                                                    <label class="checkbox-inline m-r-10 ">
+                                                        <input type="checkbox" value="" id="0" class="m-l-15 m-r-10">Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-0 ml-0" style="margin-left: -8px!important;">
+                                                @Html.TextBoxFor(m => m.ComplicationOther, new { @class = "form-control", @placeholder = "Date" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="border border-primary bg-actual-white m-b-20">
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 m-t-10">
+                                    @foreach (var PhysicalExamination in ViewBag.PhysicalExaminationList)
+                                    {
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-0">
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline m-r-10 ">
+                                                    <input type="checkbox" value="" id="@PhysicalExamination.Value" class="m-l-15 m-r-10">@PhysicalExamination.Text
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">BMI (Kg/m<sup>2</sup>)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.BMI, new { @class = "form-control", @placeholder = "mMRC Grade" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Jugular Venous Pulse</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.DropDownList("JugularVenousPulseId", (SelectList)ViewBag.LogicalList, "Select Jugular Venous Pulse", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Pulse Rate (/min)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.PulseRate, new { @class = "form-control", @placeholder = "Pulse Rate" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Blood Presure (/min)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.BloodPressure, new { @class = "form-control", @placeholder = "Blood Presure" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Cardiac Auscultation (S1)</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.CardiacAuscultationS1, new { @class = "form-control", @placeholder = "S1" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">A2/P2</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.CardiacAuscultationA2P2, new { @class = "form-control", @placeholder = "A2/P2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-0">
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-md-12 col-sm-12 col-form-label text-small">Pulmonary Aucscultation</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                @Html.TextBoxFor(m => m.PulmonaryAucscultation, new { @class = "form-control", @placeholder = "Pulmonary Aucscultation" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-0">
+                            <div class="form-row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <input type="submit" class="btn btn-primary" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".past-smoker").hide();
+
+        $('select').select2({
+            selectOnClose: true
+        });
+
+        $("#SHDateStopped").datepicker({
+            uiLibrary: 'bootstrap',
+            "dateFormat": "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:+00"
+        });
+
+        $("#DOB").datepicker({
+            uiLibrary: 'bootstrap',
+            "dateFormat": "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:+00"
+        });
+
+        $(".vaccination-history").datepicker({
+            uiLibrary: 'bootstrap',
+            "dateFormat": "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:+00"
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 60,
+            minTime: '8',
+            maxTime: '6:00pm',
+            defaultTime: '8',
+            startTime: '8:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $("#SmokingHistoryId").change(function () {
+            id = $(this).val();
+
+            if (id == 4) {
+                $(".past-smoker").show();
+            }
+            else {
+                $(".past-smoker").hide();
+            }
+        });
+
+        $(".smoking-history").change(function () {
+            $('#SHPackYears').val(calculatePackYears());
+        });
+
+        function calculatePackYears() {
+            years = $('#SHNoOfYearsSmoked').val();
+            cigs = $('#SHSmokedADay').val();
+
+            return ((years * cigs) / 20);
+        }
+
+
+        function readValues() {
+            return true;
+        }
+    });
+</script>

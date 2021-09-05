@@ -12,12 +12,13 @@ namespace PTS.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class PatientClinicDay
+    public partial class PatientMHCatScore
     {
         public int Id { get; set; }
         public Nullable<int> PatientId { get; set; }
-        public Nullable<int> ClinicDay { get; set; }
+        public Nullable<int> CATScoreId { get; set; }
     
+        public virtual CATScore CATScore { get; set; }
         public virtual Patient Patient { get; set; }
     }
 }

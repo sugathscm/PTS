@@ -1,0 +1,33 @@
+﻿
+@model  IEnumerable<PTS.DAL.CATScore>
+
+
+@foreach (var score in Model)
+{
+    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 border p-t-5">
+            @score.Name
+        </div>
+        <div class="col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12 border">
+            @*<select class="form-control  select" id="@score.Id" name="@score.Id">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>*@
+            <div id="amount-@score.Id">0</div>
+            <div id="@score.Id" name="@score.Id" class="cat-score"></div>
+        </div>
+        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 border p-t-5">
+            @score.Text
+        </div>
+    </div>
+}
+
+<script>
+
+
+</script>
+

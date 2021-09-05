@@ -1,0 +1,116 @@
+﻿
+@model PTS.DAL.COPDPSQuestionAnswer
+@{
+    /**/
+
+    ViewBag.Title = "COPDPSQuestionAnswer";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#List').DataTable({
+            "paging": true,
+
+            "ajax": {
+                "url": "/COPDPSQuestionAnswer/GetList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "Question" },
+                { "data": "Answer" },
+                { "data": "points" },
+                {
+                    "data": "IsActive",
+                    "render": function (data, type, full, meta) {
+                        if (data == true)
+                            return 'Yes';
+                        else
+                            return 'No';
+                    }
+                },
+                {
+                    "data": "Id", "searchable": false, "ordering": false,
+                    "render": function (data, type, full, meta) {
+                        return '<a class="btn btn-primary btn-xs" href="/COPDPSQuestionAnswer/Index/' + data + '">Edit</a>';
+                    }
+                },
+            ]
+        });
+    });
+</script>
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+        <!-- ============================================================== -->
+        <!-- pageheader  -->
+        <!-- ============================================================== -->
+        @Html.Partial("_PageHeaderPartial")
+        <!-- ============================================================== -->
+        <!-- end pageheader  -->
+        <!-- ============================================================== -->
+        <div class="border border-primary bg-actual-white">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-b-20">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    @using (Html.BeginForm("SaveOrUpdate", "COPDPSQuestionAnswer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "valFailure" })
+                        @Html.HiddenFor(m => m.Id, new { @name = "Id" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.COPDPSQuestionId, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("COPDPSQuestionId", (SelectList)ViewBag.COPDPSQuestionList, "Select Question", new { @class = "form-control select" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Answer, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Answer, new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.points, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.points, new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.IsActive, new { @class = "col-md-2 control-label" })
+                            <div class="col-sm-1">
+                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control", @checked = Model.IsActive })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-success" value="Save" />
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20">
+                    <div class="table-responsive">
+                        <table id="List" class="table table-striped table-bordered first">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">Question</th>
+                                    <th style="width:50%">Answer</th>
+                                    <th style="width:50%">Points</th>
+                                    <th>Active</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

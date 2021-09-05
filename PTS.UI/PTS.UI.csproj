@@ -167,18 +167,45 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClinicalController.cs" />
+    <Compile Include="Controllers\BODEIndexController.cs" />
+    <Compile Include="Controllers\CATScoreController.cs" />
+    <Compile Include="Controllers\CATScoreIntepretationController.cs" />
+    <Compile Include="Controllers\ComorbidityController.cs" />
+    <Compile Include="Controllers\ComplicationController.cs" />
+    <Compile Include="Controllers\COPDPSQuestionAnswerController.cs" />
+    <Compile Include="Controllers\COPDPSQuestionController.cs" />
+    <Compile Include="Controllers\FEV1StagingController.cs" />
+    <Compile Include="Controllers\GOLDFEV1StagingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestigationTypeController.cs" />
+    <Compile Include="Controllers\InvestigationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PatientMedicalHistoryController.cs" />
+    <Compile Include="Controllers\mMRCGradeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
-    <Compile Include="Controllers\PhysicalController.cs" />
+    <Compile Include="Controllers\PHQController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BaseViewModel.cs" />
+    <Compile Include="Models\BODEIndexViewModel.cs" />
+    <Compile Include="Models\CATScoreIntepretationViewModel.cs" />
+    <Compile Include="Models\COPDPSQuestionAnswerViewModel.cs" />
+    <Compile Include="Models\FEV1StagingViewModel.cs" />
+    <Compile Include="Models\GOLDFEV1StagingViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\mMRCGradeViewModel.cs" />
+    <Compile Include="Models\PatientMedicalHistoryViewModel.cs" />
+    <Compile Include="Models\PHQViewModel.cs" />
+    <Compile Include="Models\VisitHistoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,6 +238,7 @@
     <Content Include="assets\images\error-img.png" />
     <Content Include="assets\images\github.png" />
     <Content Include="assets\images\loader.svg" />
+    <Content Include="assets\images\login-logo.png" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\mail_chimp.png" />
     <Content Include="assets\images\product-pic-2.jpg" />
@@ -222,6 +250,7 @@
     <Content Include="assets\libs\css\datatables.min.css" />
     <Content Include="assets\libs\css\index.css" />
     <Content Include="assets\libs\css\main.css" />
+    <Content Include="assets\libs\css\select2.min.css" />
     <Content Include="assets\libs\css\style-dark.css" />
     <Content Include="assets\libs\css\style-light.css" />
     <Content Include="assets\libs\css\style.css" />
@@ -232,8 +261,12 @@
     <Content Include="assets\libs\js\datatables.min.js" />
     <Content Include="assets\libs\js\gmaps.min.js" />
     <Content Include="assets\libs\js\google_map.js" />
+    <Content Include="assets\libs\js\jquery-ui.js" />
+    <Content Include="assets\libs\js\jquery.min.js" />
     <Content Include="assets\libs\js\jvectormap.custom.js" />
     <Content Include="assets\libs\js\main-js.js" />
+    <Content Include="assets\libs\js\printThis.js" />
+    <Content Include="assets\libs\js\select2.min.js" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.css" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.min.js" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.png" />
@@ -588,6 +621,14 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="MedicalResources\Chronic Obstructive Pulmonary Disease-English.pdf" />
+    <Content Include="MedicalResources\Chronic Obstructive Pulmonary Disease-Sinhala.pdf" />
+    <Content Include="MedicalResources\COPD.pdf" />
+    <Content Include="MedicalResources\COPD_Emergency_Action_Plan-English.pdf" />
+    <Content Include="MedicalResources\COPD_Emergency_Action_Plan-Sinhala.pdf" />
+    <Content Include="MedicalResources\COPD_Emergency_Action_Plan-Tamil.pdf" />
+    <Content Include="MedicalResources\PHQ.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Resources\login-logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -731,7 +772,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -778,9 +821,25 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Patient\Details.cshtml" />
-    <Content Include="Views\Physical\Index.cshtml" />
-    <Content Include="Views\Clinical\Index.cshtml" />
     <Content Include="Views\Shared\_PageHeaderPartial.cshtml" />
+    <Content Include="Views\PatientMedicalHistory\Index.cshtml" />
+    <Content Include="Views\PatientMedicalHistory\Details.cshtml" />
+    <Content Include="Views\mMRCGrade\Index.cshtml" />
+    <Content Include="Views\CATScore\Index.cshtml" />
+    <Content Include="Views\PatientMedicalHistory\_CATScore.cshtml" />
+    <Content Include="Views\Comorbidity\Index.cshtml" />
+    <Content Include="Views\Complication\Index.cshtml" />
+    <Content Include="Views\Investigation\Index.cshtml" />
+    <Content Include="Views\InvestigationType\Index.cshtml" />
+    <Content Include="Views\CATScoreIntepretation\Index.cshtml" />
+    <Content Include="Views\FEV1Staging\Index.cshtml" />
+    <Content Include="Views\COPDPSQuestion\Index.cshtml" />
+    <Content Include="Views\COPDPSQuestionAnswer\Index.cshtml" />
+    <Content Include="Views\GOLDFEV1Staging\Index.cshtml" />
+    <Content Include="Views\BODEIndex\Index.cshtml" />
+    <Content Include="Views\PHQ\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\PatientMedicalHistory\_Investigations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -797,9 +856,14 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ResourceData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

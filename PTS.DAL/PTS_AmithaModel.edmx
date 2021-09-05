@@ -66,13 +66,130 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="BODEIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VAriable" Type="nvarchar" MaxLength="200" />
+          <Property Name="Point1" Type="nvarchar" MaxLength="200" />
+          <Property Name="Point2" Type="nvarchar" MaxLength="200" />
+          <Property Name="Point3" Type="nvarchar" MaxLength="200" />
+          <Property Name="Point4" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Text" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATScoreIntepretation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Range" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="DetailList" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comorbidity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Complication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COPDPSQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COPDPSQuestionAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="COPDPSQuestionId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="points" Type="int" />
+        </EntityType>
+        <EntityType Name="ExacerbationHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FamilyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FEV1Staging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stage" Type="nvarchar" MaxLength="200" />
+          <Property Name="Text" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GOLDFEV1Staging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stage" Type="nvarchar" MaxLength="200" />
+          <Property Name="Text" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investigation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="InvestigationTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvestigationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="MaritialStatus">
           <Key>
@@ -80,7 +197,16 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mMRCGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -102,17 +228,94 @@
           <Property Name="AddressLine1" Type="nvarchar" MaxLength="150" />
           <Property Name="AddressLine2" Type="nvarchar" MaxLength="150" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
-          <Property Name="Desgnation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="50" />
           <Property Name="EmergencyContactName" Type="nvarchar" MaxLength="150" />
           <Property Name="EmergencyContactNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClinicDays" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClinicTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodePrefix" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodeNumber" Type="int" />
         </EntityType>
-        <EntityType Name="PatientClinicDay">
+        <EntityType Name="PatientInvestigation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="InvestigationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientMedicalHistory">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PatientId" Type="int" />
-          <Property Name="ClinicDay" Type="int" />
+          <Property Name="DyspnoeaId" Type="int" />
+          <Property Name="mMRCGradeId" Type="int" />
+          <Property Name="CATScore" Type="nvarchar" MaxLength="150" />
+          <Property Name="NoOfExacerbationPerLastYear" Type="nvarchar" MaxLength="150" />
+          <Property Name="ComorbidityId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComorbidityOthers" Type="nvarchar" MaxLength="150" />
+          <Property Name="SmokingHistoryId" Type="int" />
+          <Property Name="SHDateStopped" Type="datetime" />
+          <Property Name="SHSmokedADay" Type="nvarchar" MaxLength="50" />
+          <Property Name="SHNoOfYearsSmoked" Type="nvarchar" MaxLength="50" />
+          <Property Name="SHPackYears" Type="nvarchar" MaxLength="50" />
+          <Property Name="ETS" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubstanceAbuse" Type="nvarchar" MaxLength="50" />
+          <Property Name="BiomassFuelSmokeExposure" Type="nvarchar" MaxLength="50" />
+          <Property Name="OccupationAtPresent" Type="nvarchar" MaxLength="50" />
+          <Property Name="PreviousOccupations" Type="nvarchar" MaxLength="150" />
+          <Property Name="FamilyHistoryId" Type="nvarchar" MaxLength="50" />
+          <Property Name="FamilyHistoryOthers" Type="nvarchar" MaxLength="150" />
+          <Property Name="AllergicHistoryDrugs" Type="nvarchar" MaxLength="150" />
+          <Property Name="AllergicHistoryOthers" Type="nvarchar" MaxLength="150" />
+          <Property Name="MedicationHistoryCOPD" Type="nvarchar" MaxLength="150" />
+          <Property Name="MedicationHistoryNonCOPD" Type="nvarchar" MaxLength="150" />
+          <Property Name="VaccinationHistoryId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComplicationId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComplicationOther" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhysicalExaminationId" Type="nvarchar" MaxLength="50" />
+          <Property Name="BMI" Type="nvarchar" MaxLength="50" />
+          <Property Name="JugularVenousPulseId" Type="int" />
+          <Property Name="PulseRate" Type="nvarchar" MaxLength="50" />
+          <Property Name="BloodPressure" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardiacAuscultationA2P2" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardiacAuscultationS1" Type="nvarchar" MaxLength="50" />
+          <Property Name="PulmonaryAucscultation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExacerbationHistoryId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PatientMHCatScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="CATScoreId" Type="int" />
+        </EntityType>
+        <EntityType Name="PHQ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhysicalExamination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SmokingHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
@@ -120,7 +323,28 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="VaccinationHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_COPDPSQuestionAnswer_COPDPSQuestion">
+          <End Role="COPDPSQuestion" Type="Self.COPDPSQuestion" Multiplicity="1" />
+          <End Role="COPDPSQuestionAnswer" Type="Self.COPDPSQuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COPDPSQuestion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COPDPSQuestionAnswer">
+              <PropertyRef Name="COPDPSQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -177,6 +401,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Investigation_InvestigationType">
+          <End Role="InvestigationType" Type="Self.InvestigationType" Multiplicity="1" />
+          <End Role="Investigation" Type="Self.Investigation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Investigation">
+              <PropertyRef Name="InvestigationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Patient_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
           <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
@@ -213,14 +449,86 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PatientClinicDay_Patient">
-          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
-          <End Role="PatientClinicDay" Type="Self.PatientClinicDay" Multiplicity="*" />
+        <Association Name="FK_PatientInvestigation_Investigation">
+          <End Role="Investigation" Type="Self.Investigation" Multiplicity="1" />
+          <End Role="PatientInvestigation" Type="Self.PatientInvestigation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investigation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInvestigation">
+              <PropertyRef Name="InvestigationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInvestigation_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientInvestigation" Type="Self.PatientInvestigation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PatientClinicDay">
+            <Dependent Role="PatientInvestigation">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMedicalHistory_mMRCGrade">
+          <End Role="mMRCGrade" Type="Self.mMRCGrade" Multiplicity="0..1" />
+          <End Role="PatientMedicalHistory" Type="Self.PatientMedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mMRCGrade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMedicalHistory">
+              <PropertyRef Name="mMRCGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMedicalHistory_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientMedicalHistory" Type="Self.PatientMedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMedicalHistory">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMedicalHistory_SmokingHistory">
+          <End Role="SmokingHistory" Type="Self.SmokingHistory" Multiplicity="0..1" />
+          <End Role="PatientMedicalHistory" Type="Self.PatientMedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmokingHistory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMedicalHistory">
+              <PropertyRef Name="SmokingHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMHCatScore_CATScore">
+          <End Role="CATScore" Type="Self.CATScore" Multiplicity="0..1" />
+          <End Role="PatientMHCatScore" Type="Self.PatientMHCatScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATScore">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMHCatScore">
+              <PropertyRef Name="CATScoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMHCatScore_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientMHCatScore" Type="Self.PatientMHCatScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMHCatScore">
               <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
@@ -232,11 +540,35 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BODEIndex" EntityType="Self.BODEIndex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATScore" EntityType="Self.CATScore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATScoreIntepretation" EntityType="Self.CATScoreIntepretation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comorbidity" EntityType="Self.Comorbidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Complication" EntityType="Self.Complication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COPDPSQuestion" EntityType="Self.COPDPSQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COPDPSQuestionAnswer" EntityType="Self.COPDPSQuestionAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExacerbationHistory" EntityType="Self.ExacerbationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilyHistory" EntityType="Self.FamilyHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FEV1Staging" EntityType="Self.FEV1Staging" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GOLDFEV1Staging" EntityType="Self.GOLDFEV1Staging" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investigation" EntityType="Self.Investigation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvestigationType" EntityType="Self.InvestigationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaritialStatus" EntityType="Self.MaritialStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mMRCGrade" EntityType="Self.mMRCGrade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PatientClinicDay" EntityType="Self.PatientClinicDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInvestigation" EntityType="Self.PatientInvestigation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientMedicalHistory" EntityType="Self.PatientMedicalHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientMHCatScore" EntityType="Self.PatientMHCatScore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHQ" EntityType="Self.PHQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhysicalExamination" EntityType="Self.PhysicalExamination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SmokingHistory" EntityType="Self.SmokingHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VaccinationHistory" EntityType="Self.VaccinationHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_COPDPSQuestionAnswer_COPDPSQuestion" Association="Self.FK_COPDPSQuestionAnswer_COPDPSQuestion">
+            <End Role="COPDPSQuestion" EntitySet="COPDPSQuestion" />
+            <End Role="COPDPSQuestionAnswer" EntitySet="COPDPSQuestionAnswer" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -253,6 +585,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Investigation_InvestigationType" Association="Self.FK_Investigation_InvestigationType">
+            <End Role="InvestigationType" EntitySet="InvestigationType" />
+            <End Role="Investigation" EntitySet="Investigation" />
+          </AssociationSet>
           <AssociationSet Name="FK_Patient_Gender" Association="Self.FK_Patient_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Patient" EntitySet="Patient" />
@@ -265,42 +601,158 @@
             <End Role="Title" EntitySet="Title" />
             <End Role="Patient" EntitySet="Patient" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientClinicDay_Patient" Association="Self.FK_PatientClinicDay_Patient">
+          <AssociationSet Name="FK_PatientInvestigation_Investigation" Association="Self.FK_PatientInvestigation_Investigation">
+            <End Role="Investigation" EntitySet="Investigation" />
+            <End Role="PatientInvestigation" EntitySet="PatientInvestigation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInvestigation_Patient" Association="Self.FK_PatientInvestigation_Patient">
             <End Role="Patient" EntitySet="Patient" />
-            <End Role="PatientClinicDay" EntitySet="PatientClinicDay" />
+            <End Role="PatientInvestigation" EntitySet="PatientInvestigation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMedicalHistory_mMRCGrade" Association="Self.FK_PatientMedicalHistory_mMRCGrade">
+            <End Role="mMRCGrade" EntitySet="mMRCGrade" />
+            <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMedicalHistory_Patient" Association="Self.FK_PatientMedicalHistory_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMedicalHistory_SmokingHistory" Association="Self.FK_PatientMedicalHistory_SmokingHistory">
+            <End Role="SmokingHistory" EntitySet="SmokingHistory" />
+            <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMHCatScore_CATScore" Association="Self.FK_PatientMHCatScore_CATScore">
+            <End Role="CATScore" EntitySet="CATScore" />
+            <End Role="PatientMHCatScore" EntitySet="PatientMHCatScore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMHCatScore_Patient" Association="Self.FK_PatientMHCatScore_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientMHCatScore" EntitySet="PatientMHCatScore" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PTS_AmithaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PTS_AmithaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="PTS_AmithaModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="PTS_AmithaModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="PTS_AmithaModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="PTS_AmithaModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="PTS_AmithaModel.AspNetUser" />
+          <EntitySet Name="Comorbidities" EntityType="PTS_AmithaModel.Comorbidity" />
+          <EntitySet Name="Complications" EntityType="PTS_AmithaModel.Complication" />
+          <EntitySet Name="FamilyHistories" EntityType="PTS_AmithaModel.FamilyHistory" />
+          <EntitySet Name="Genders" EntityType="PTS_AmithaModel.Gender" />
+          <EntitySet Name="MaritialStatus" EntityType="PTS_AmithaModel.MaritialStatu" />
+          <EntitySet Name="mMRCGrades" EntityType="PTS_AmithaModel.mMRCGrade" />
+          <EntitySet Name="PhysicalExaminations" EntityType="PTS_AmithaModel.PhysicalExamination" />
+          <EntitySet Name="SmokingHistories" EntityType="PTS_AmithaModel.SmokingHistory" />
+          <EntitySet Name="Titles" EntityType="PTS_AmithaModel.Title" />
+          <EntitySet Name="VaccinationHistories" EntityType="PTS_AmithaModel.VaccinationHistory" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="PTS_AmithaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="PTS_AmithaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="PTS_AmithaModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="CATScores" EntityType="PTS_AmithaModel.CATScore" />
+          <EntitySet Name="PatientMHCatScores" EntityType="PTS_AmithaModel.PatientMHCatScore" />
+          <AssociationSet Name="FK_PatientMHCatScore_CATScore" Association="PTS_AmithaModel.FK_PatientMHCatScore_CATScore">
+            <End Role="CATScore" EntitySet="CATScores" />
+            <End Role="PatientMHCatScore" EntitySet="PatientMHCatScores" />
+          </AssociationSet>
+          <EntitySet Name="ExacerbationHistories" EntityType="PTS_AmithaModel.ExacerbationHistory" />
+          <EntitySet Name="Investigations" EntityType="PTS_AmithaModel.Investigation" />
+          <EntitySet Name="PatientInvestigations" EntityType="PTS_AmithaModel.PatientInvestigation" />
+          <AssociationSet Name="FK_PatientInvestigation_Investigation" Association="PTS_AmithaModel.FK_PatientInvestigation_Investigation">
+            <End Role="Investigation" EntitySet="Investigations" />
+            <End Role="PatientInvestigation" EntitySet="PatientInvestigations" />
+          </AssociationSet>
+          <EntitySet Name="InvestigationTypes" EntityType="PTS_AmithaModel.InvestigationType" />
+          <AssociationSet Name="FK_Investigation_InvestigationType" Association="PTS_AmithaModel.FK_Investigation_InvestigationType">
+            <End Role="InvestigationType" EntitySet="InvestigationTypes" />
+            <End Role="Investigation" EntitySet="Investigations" />
+          </AssociationSet>
+          <EntitySet Name="PatientMedicalHistories" EntityType="PTS_AmithaModel.PatientMedicalHistory" />
+          <AssociationSet Name="FK_PatientMedicalHistory_mMRCGrade" Association="PTS_AmithaModel.FK_PatientMedicalHistory_mMRCGrade">
+            <End Role="mMRCGrade" EntitySet="mMRCGrades" />
+            <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMedicalHistory_SmokingHistory" Association="PTS_AmithaModel.FK_PatientMedicalHistory_SmokingHistory">
+            <End Role="SmokingHistory" EntitySet="SmokingHistories" />
+            <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistories" />
+          </AssociationSet>
+          <EntitySet Name="Patients" EntityType="PTS_AmithaModel.Patient" />
+          <AssociationSet Name="FK_Patient_Gender" Association="PTS_AmithaModel.FK_Patient_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_MaritialStatus" Association="PTS_AmithaModel.FK_Patient_MaritialStatus">
+            <End Role="MaritialStatu" EntitySet="MaritialStatus" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Title" Association="PTS_AmithaModel.FK_Patient_Title">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInvestigation_Patient" Association="PTS_AmithaModel.FK_PatientInvestigation_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientInvestigation" EntitySet="PatientInvestigations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMedicalHistory_Patient" Association="PTS_AmithaModel.FK_PatientMedicalHistory_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientMHCatScore_Patient" Association="PTS_AmithaModel.FK_PatientMHCatScore_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientMHCatScore" EntitySet="PatientMHCatScores" />
+          </AssociationSet>
+          <EntitySet Name="CATScoreIntepretations" EntityType="PTS_AmithaModel.CATScoreIntepretation" />
+          <EntitySet Name="FEV1Staging" EntityType="PTS_AmithaModel.FEV1Staging" />
+          <EntitySet Name="COPDPSQuestions" EntityType="PTS_AmithaModel.COPDPSQuestion" />
+          <EntitySet Name="COPDPSQuestionAnswers" EntityType="PTS_AmithaModel.COPDPSQuestionAnswer" />
+          <AssociationSet Name="FK_COPDPSQuestionAnswer_COPDPSQuestion" Association="PTS_AmithaModel.FK_COPDPSQuestionAnswer_COPDPSQuestion">
+            <End Role="COPDPSQuestion" EntitySet="COPDPSQuestions" />
+            <End Role="COPDPSQuestionAnswer" EntitySet="COPDPSQuestionAnswers" />
+          </AssociationSet>
+          <EntitySet Name="GOLDFEV1Staging" EntityType="PTS_AmithaModel.GOLDFEV1Staging" />
+          <EntitySet Name="BODEIndexes" EntityType="PTS_AmithaModel.BODEIndex" />
+          <EntitySet Name="PHQs" EntityType="PTS_AmithaModel.PHQ" />
+          </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PTS_AmithaModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="PTS_AmithaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -308,16 +760,16 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="PTS_AmithaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -328,10 +780,34 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="PTS_AmithaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="PTS_AmithaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="PTS_AmithaModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="Comorbidity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Complication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FamilyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -339,8 +815,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Gender" FromRole="Gender" ToRole="Patient" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="PTS_AmithaModel.FK_Patient_Gender" FromRole="Gender" ToRole="Patient" />
         </EntityType>
         <EntityType Name="MaritialStatu">
           <Key>
@@ -348,9 +824,247 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_MaritialStatus" FromRole="MaritialStatus" ToRole="Patient" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="PTS_AmithaModel.FK_Patient_MaritialStatus" FromRole="MaritialStatu" ToRole="Patient" />
         </EntityType>
+        <EntityType Name="mMRCGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PatientMedicalHistories" Relationship="PTS_AmithaModel.FK_PatientMedicalHistory_mMRCGrade" FromRole="mMRCGrade" ToRole="PatientMedicalHistory" />
+        </EntityType>
+        <EntityType Name="PhysicalExamination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SmokingHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PatientMedicalHistories" Relationship="PTS_AmithaModel.FK_PatientMedicalHistory_SmokingHistory" FromRole="SmokingHistory" ToRole="PatientMedicalHistory" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="PTS_AmithaModel.FK_Patient_Title" FromRole="Title" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="VaccinationHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="PTS_AmithaModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PTS_AmithaModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="PTS_AmithaModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PTS_AmithaModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="PTS_AmithaModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="PTS_AmithaModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CATScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PatientMHCatScores" Relationship="PTS_AmithaModel.FK_PatientMHCatScore_CATScore" FromRole="CATScore" ToRole="PatientMHCatScore" />
+        </EntityType>
+        <EntityType Name="PatientMHCatScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="CATScoreId" Type="Int32" />
+          <NavigationProperty Name="CATScore" Relationship="PTS_AmithaModel.FK_PatientMHCatScore_CATScore" FromRole="PatientMHCatScore" ToRole="CATScore" />
+          <NavigationProperty Name="Patient" Relationship="PTS_AmithaModel.FK_PatientMHCatScore_Patient" FromRole="PatientMHCatScore" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_PatientMHCatScore_CATScore">
+          <End Type="PTS_AmithaModel.CATScore" Role="CATScore" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.PatientMHCatScore" Role="PatientMHCatScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATScore">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMHCatScore">
+              <PropertyRef Name="CATScoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ExacerbationHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investigation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PatientInvestigations" Relationship="PTS_AmithaModel.FK_PatientInvestigation_Investigation" FromRole="Investigation" ToRole="PatientInvestigation" />
+          <Property Name="InvestigationTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InvestigationType" Relationship="PTS_AmithaModel.FK_Investigation_InvestigationType" FromRole="Investigation" ToRole="InvestigationType" />
+        </EntityType>
+        <EntityType Name="PatientInvestigation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="InvestigationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Investigation" Relationship="PTS_AmithaModel.FK_PatientInvestigation_Investigation" FromRole="PatientInvestigation" ToRole="Investigation" />
+          <NavigationProperty Name="Patient" Relationship="PTS_AmithaModel.FK_PatientInvestigation_Patient" FromRole="PatientInvestigation" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_PatientInvestigation_Investigation">
+          <End Type="PTS_AmithaModel.Investigation" Role="Investigation" Multiplicity="1" />
+          <End Type="PTS_AmithaModel.PatientInvestigation" Role="PatientInvestigation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investigation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInvestigation">
+              <PropertyRef Name="InvestigationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InvestigationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Investigations" Relationship="PTS_AmithaModel.FK_Investigation_InvestigationType" FromRole="InvestigationType" ToRole="Investigation" />
+        </EntityType>
+        <Association Name="FK_Investigation_InvestigationType">
+          <End Type="PTS_AmithaModel.InvestigationType" Role="InvestigationType" Multiplicity="1" />
+          <End Type="PTS_AmithaModel.Investigation" Role="Investigation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Investigation">
+              <PropertyRef Name="InvestigationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PatientMedicalHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="DyspnoeaId" Type="Int32" />
+          <Property Name="mMRCGradeId" Type="Int32" />
+          <Property Name="CATScore" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfExacerbationPerLastYear" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ComorbidityId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComorbidityOthers" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SmokingHistoryId" Type="Int32" />
+          <Property Name="SHDateStopped" Type="DateTime" Precision="3" />
+          <Property Name="SHSmokedADay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SHNoOfYearsSmoked" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SHPackYears" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ETS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubstanceAbuse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BiomassFuelSmokeExposure" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OccupationAtPresent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousOccupations" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyHistoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyHistoryOthers" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AllergicHistoryDrugs" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AllergicHistoryOthers" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MedicationHistoryCOPD" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MedicationHistoryNonCOPD" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="VaccinationHistoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComplicationId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComplicationOther" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhysicalExaminationId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BMI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JugularVenousPulseId" Type="Int32" />
+          <Property Name="PulseRate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BloodPressure" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardiacAuscultationA2P2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardiacAuscultationS1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PulmonaryAucscultation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExacerbationHistoryId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="mMRCGrade" Relationship="PTS_AmithaModel.FK_PatientMedicalHistory_mMRCGrade" FromRole="PatientMedicalHistory" ToRole="mMRCGrade" />
+          <NavigationProperty Name="SmokingHistory" Relationship="PTS_AmithaModel.FK_PatientMedicalHistory_SmokingHistory" FromRole="PatientMedicalHistory" ToRole="SmokingHistory" />
+          <NavigationProperty Name="Patient" Relationship="PTS_AmithaModel.FK_PatientMedicalHistory_Patient" FromRole="PatientMedicalHistory" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_PatientMedicalHistory_mMRCGrade">
+          <End Type="PTS_AmithaModel.mMRCGrade" Role="mMRCGrade" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.PatientMedicalHistory" Role="PatientMedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mMRCGrade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMedicalHistory">
+              <PropertyRef Name="mMRCGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMedicalHistory_SmokingHistory">
+          <End Type="PTS_AmithaModel.SmokingHistory" Role="SmokingHistory" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.PatientMedicalHistory" Role="PatientMedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmokingHistory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMedicalHistory">
+              <PropertyRef Name="SmokingHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Patient">
           <Key>
             <PropertyRef Name="Id" />
@@ -368,56 +1082,26 @@
           <Property Name="DOB" Type="DateTime" Precision="3" />
           <Property Name="Height" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_Patient_Gender" FromRole="Patient" ToRole="Gender" />
-          <NavigationProperty Name="MaritialStatu" Relationship="Self.FK_Patient_MaritialStatus" FromRole="Patient" ToRole="MaritialStatus" />
-          <NavigationProperty Name="Title" Relationship="Self.FK_Patient_Title" FromRole="Patient" ToRole="Title" />
           <Property Name="AddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="AddressLine2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Desgnation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmergencyContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="EmergencyContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PatientClinicDays" Relationship="PTS_AmithaModel.FK_PatientClinicDay_Patient" FromRole="Patient" ToRole="PatientClinicDay" />
+          <Property Name="ClinicDays" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClinicTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodePrefix" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodeNumber" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="PTS_AmithaModel.FK_Patient_Gender" FromRole="Patient" ToRole="Gender" />
+          <NavigationProperty Name="MaritialStatu" Relationship="PTS_AmithaModel.FK_Patient_MaritialStatus" FromRole="Patient" ToRole="MaritialStatu" />
+          <NavigationProperty Name="Title" Relationship="PTS_AmithaModel.FK_Patient_Title" FromRole="Patient" ToRole="Title" />
+          <NavigationProperty Name="PatientInvestigations" Relationship="PTS_AmithaModel.FK_PatientInvestigation_Patient" FromRole="Patient" ToRole="PatientInvestigation" />
+          <NavigationProperty Name="PatientMedicalHistories" Relationship="PTS_AmithaModel.FK_PatientMedicalHistory_Patient" FromRole="Patient" ToRole="PatientMedicalHistory" />
+          <NavigationProperty Name="PatientMHCatScores" Relationship="PTS_AmithaModel.FK_PatientMHCatScore_Patient" FromRole="Patient" ToRole="PatientMHCatScore" />
         </EntityType>
-        <EntityType Name="Title">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Title" FromRole="Title" ToRole="Patient" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Patient_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
-          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <End Type="PTS_AmithaModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="Id" />
@@ -428,10 +1112,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Patient_MaritialStatus">
-          <End Role="MaritialStatus" Type="Self.MaritialStatu" Multiplicity="0..1" />
-          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <End Type="PTS_AmithaModel.MaritialStatu" Role="MaritialStatu" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MaritialStatus">
+            <Principal Role="MaritialStatu">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Patient">
@@ -440,8 +1124,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Patient_Title">
-          <End Role="Title" Type="Self.Title" Multiplicity="0..1" />
-          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <End Type="PTS_AmithaModel.Title" Role="Title" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Title">
               <PropertyRef Name="Id" />
@@ -451,72 +1135,124 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="PTS_AmithaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Genders" EntityType="Self.Gender" />
-          <EntitySet Name="MaritialStatus" EntityType="Self.MaritialStatu" />
-          <EntitySet Name="Patients" EntityType="Self.Patient" />
-          <EntitySet Name="Titles" EntityType="Self.Title" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patient_Gender" Association="Self.FK_Patient_Gender">
-            <End Role="Gender" EntitySet="Genders" />
-            <End Role="Patient" EntitySet="Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patient_MaritialStatus" Association="Self.FK_Patient_MaritialStatus">
-            <End Role="MaritialStatus" EntitySet="MaritialStatus" />
-            <End Role="Patient" EntitySet="Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patient_Title" Association="Self.FK_Patient_Title">
-            <End Role="Title" EntitySet="Titles" />
-            <End Role="Patient" EntitySet="Patients" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="PatientClinicDays" EntityType="PTS_AmithaModel.PatientClinicDay" />
-          <AssociationSet Name="FK_PatientClinicDay_Patient" Association="PTS_AmithaModel.FK_PatientClinicDay_Patient">
-            <End Role="Patient" EntitySet="Patients" />
-            <End Role="PatientClinicDay" EntitySet="PatientClinicDays" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="PatientClinicDay">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PatientId" Type="Int32" />
-          <Property Name="ClinicDay" Type="Int32" />
-          <NavigationProperty Name="Patient" Relationship="PTS_AmithaModel.FK_PatientClinicDay_Patient" FromRole="PatientClinicDay" ToRole="Patient" />
-        </EntityType>
-        <Association Name="FK_PatientClinicDay_Patient">
-          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="0..1" />
-          <End Type="PTS_AmithaModel.PatientClinicDay" Role="PatientClinicDay" Multiplicity="*" />
+        <Association Name="FK_PatientInvestigation_Patient">
+          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="PTS_AmithaModel.PatientInvestigation" Role="PatientInvestigation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PatientClinicDay">
+            <Dependent Role="PatientInvestigation">
               <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_PatientMedicalHistory_Patient">
+          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.PatientMedicalHistory" Role="PatientMedicalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMedicalHistory">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientMHCatScore_Patient">
+          <End Type="PTS_AmithaModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="PTS_AmithaModel.PatientMHCatScore" Role="PatientMHCatScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMHCatScore">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CATScoreIntepretation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Range" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DetailList" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FEV1Staging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COPDPSQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="COPDPSQuestionAnswers" Relationship="PTS_AmithaModel.FK_COPDPSQuestionAnswer_COPDPSQuestion" FromRole="COPDPSQuestion" ToRole="COPDPSQuestionAnswer" />
+        </EntityType>
+        <EntityType Name="COPDPSQuestionAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="COPDPSQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="COPDPSQuestion" Relationship="PTS_AmithaModel.FK_COPDPSQuestionAnswer_COPDPSQuestion" FromRole="COPDPSQuestionAnswer" ToRole="COPDPSQuestion" />
+          <Property Name="points" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_COPDPSQuestionAnswer_COPDPSQuestion">
+          <End Type="PTS_AmithaModel.COPDPSQuestion" Role="COPDPSQuestion" Multiplicity="1" />
+          <End Type="PTS_AmithaModel.COPDPSQuestionAnswer" Role="COPDPSQuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COPDPSQuestion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COPDPSQuestionAnswer">
+              <PropertyRef Name="COPDPSQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GOLDFEV1Staging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BODEIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VAriable" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Point1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Point2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Point3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Point4" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PHQ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -525,122 +1261,354 @@
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="PTS_AmithaModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="PTS_AmithaModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="PTS_AmithaModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="PTS_AmithaModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="PTS_AmithaModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comorbidities">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.Comorbidity">
+              <MappingFragment StoreEntitySet="Comorbidity">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Complications">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.Complication">
+              <MappingFragment StoreEntitySet="Complication">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilyHistories">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.FamilyHistory">
+              <MappingFragment StoreEntitySet="FamilyHistory">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Genders">
             <EntityTypeMapping TypeName="PTS_AmithaModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MaritialStatus">
             <EntityTypeMapping TypeName="PTS_AmithaModel.MaritialStatu">
               <MappingFragment StoreEntitySet="MaritialStatus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Patients">
-            <EntityTypeMapping TypeName="PTS_AmithaModel.Patient">
-              <MappingFragment StoreEntitySet="Patient">
-                <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
-                <ScalarProperty Name="EmergencyContactName" ColumnName="EmergencyContactName" />
-                <ScalarProperty Name="Desgnation" ColumnName="Desgnation" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TitleId" ColumnName="TitleId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-                <ScalarProperty Name="MaritialStatusId" ColumnName="MaritialStatusId" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="NIC" ColumnName="NIC" />
-                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
+          <EntitySetMapping Name="mMRCGrades">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.mMRCGrade">
+              <MappingFragment StoreEntitySet="mMRCGrade">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhysicalExaminations">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.PhysicalExamination">
+              <MappingFragment StoreEntitySet="PhysicalExamination">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmokingHistories">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.SmokingHistory">
+              <MappingFragment StoreEntitySet="SmokingHistory">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Titles">
             <EntityTypeMapping TypeName="PTS_AmithaModel.Title">
               <MappingFragment StoreEntitySet="Title">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VaccinationHistories">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.VaccinationHistory">
+              <MappingFragment StoreEntitySet="VaccinationHistory">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="PTS_AmithaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
+            <EndProperty Name="AspNetUser">
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="PatientClinicDays">
-            <EntityTypeMapping TypeName="PTS_AmithaModel.PatientClinicDay">
-              <MappingFragment StoreEntitySet="PatientClinicDay">
-                <ScalarProperty Name="ClinicDay" ColumnName="ClinicDay" />
+          <EntitySetMapping Name="CATScores">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.CATScore">
+              <MappingFragment StoreEntitySet="CATScore">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientMHCatScores">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.PatientMHCatScore">
+              <MappingFragment StoreEntitySet="PatientMHCatScore">
+                <ScalarProperty Name="CATScoreId" ColumnName="CATScoreId" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExacerbationHistories">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.ExacerbationHistory">
+              <MappingFragment StoreEntitySet="ExacerbationHistory">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investigations">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.Investigation">
+              <MappingFragment StoreEntitySet="Investigation">
+                <ScalarProperty Name="InvestigationTypeId" ColumnName="InvestigationTypeId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientInvestigations">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.PatientInvestigation">
+              <MappingFragment StoreEntitySet="PatientInvestigation">
+                <ScalarProperty Name="InvestigationId" ColumnName="InvestigationId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvestigationTypes">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.InvestigationType">
+              <MappingFragment StoreEntitySet="InvestigationType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientMedicalHistories">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.PatientMedicalHistory">
+              <MappingFragment StoreEntitySet="PatientMedicalHistory">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ExacerbationHistoryId" ColumnName="ExacerbationHistoryId" />
+                <ScalarProperty Name="PulmonaryAucscultation" ColumnName="PulmonaryAucscultation" />
+                <ScalarProperty Name="CardiacAuscultationS1" ColumnName="CardiacAuscultationS1" />
+                <ScalarProperty Name="CardiacAuscultationA2P2" ColumnName="CardiacAuscultationA2P2" />
+                <ScalarProperty Name="BloodPressure" ColumnName="BloodPressure" />
+                <ScalarProperty Name="PulseRate" ColumnName="PulseRate" />
+                <ScalarProperty Name="JugularVenousPulseId" ColumnName="JugularVenousPulseId" />
+                <ScalarProperty Name="BMI" ColumnName="BMI" />
+                <ScalarProperty Name="PhysicalExaminationId" ColumnName="PhysicalExaminationId" />
+                <ScalarProperty Name="ComplicationOther" ColumnName="ComplicationOther" />
+                <ScalarProperty Name="ComplicationId" ColumnName="ComplicationId" />
+                <ScalarProperty Name="VaccinationHistoryId" ColumnName="VaccinationHistoryId" />
+                <ScalarProperty Name="MedicationHistoryNonCOPD" ColumnName="MedicationHistoryNonCOPD" />
+                <ScalarProperty Name="MedicationHistoryCOPD" ColumnName="MedicationHistoryCOPD" />
+                <ScalarProperty Name="AllergicHistoryOthers" ColumnName="AllergicHistoryOthers" />
+                <ScalarProperty Name="AllergicHistoryDrugs" ColumnName="AllergicHistoryDrugs" />
+                <ScalarProperty Name="FamilyHistoryOthers" ColumnName="FamilyHistoryOthers" />
+                <ScalarProperty Name="FamilyHistoryId" ColumnName="FamilyHistoryId" />
+                <ScalarProperty Name="PreviousOccupations" ColumnName="PreviousOccupations" />
+                <ScalarProperty Name="OccupationAtPresent" ColumnName="OccupationAtPresent" />
+                <ScalarProperty Name="BiomassFuelSmokeExposure" ColumnName="BiomassFuelSmokeExposure" />
+                <ScalarProperty Name="SubstanceAbuse" ColumnName="SubstanceAbuse" />
+                <ScalarProperty Name="ETS" ColumnName="ETS" />
+                <ScalarProperty Name="SHPackYears" ColumnName="SHPackYears" />
+                <ScalarProperty Name="SHNoOfYearsSmoked" ColumnName="SHNoOfYearsSmoked" />
+                <ScalarProperty Name="SHSmokedADay" ColumnName="SHSmokedADay" />
+                <ScalarProperty Name="SHDateStopped" ColumnName="SHDateStopped" />
+                <ScalarProperty Name="SmokingHistoryId" ColumnName="SmokingHistoryId" />
+                <ScalarProperty Name="ComorbidityOthers" ColumnName="ComorbidityOthers" />
+                <ScalarProperty Name="ComorbidityId" ColumnName="ComorbidityId" />
+                <ScalarProperty Name="NoOfExacerbationPerLastYear" ColumnName="NoOfExacerbationPerLastYear" />
+                <ScalarProperty Name="CATScore" ColumnName="CATScore" />
+                <ScalarProperty Name="mMRCGradeId" ColumnName="mMRCGradeId" />
+                <ScalarProperty Name="DyspnoeaId" ColumnName="DyspnoeaId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="CodeNumber" ColumnName="CodeNumber" />
+                <ScalarProperty Name="CodePrefix" ColumnName="CodePrefix" />
+                <ScalarProperty Name="ClinicTime" ColumnName="ClinicTime" />
+                <ScalarProperty Name="ClinicDays" ColumnName="ClinicDays" />
+                <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
+                <ScalarProperty Name="EmergencyContactName" ColumnName="EmergencyContactName" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="NIC" ColumnName="NIC" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="MaritialStatusId" ColumnName="MaritialStatusId" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATScoreIntepretations">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.CATScoreIntepretation">
+              <MappingFragment StoreEntitySet="CATScoreIntepretation">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DetailList" ColumnName="DetailList" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FEV1Staging">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.FEV1Staging">
+              <MappingFragment StoreEntitySet="FEV1Staging">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COPDPSQuestions">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.COPDPSQuestion">
+              <MappingFragment StoreEntitySet="COPDPSQuestion">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COPDPSQuestionAnswers">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.COPDPSQuestionAnswer">
+              <MappingFragment StoreEntitySet="COPDPSQuestionAnswer">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="COPDPSQuestionId" ColumnName="COPDPSQuestionId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GOLDFEV1Staging">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.GOLDFEV1Staging">
+              <MappingFragment StoreEntitySet="GOLDFEV1Staging">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BODEIndexes">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.BODEIndex">
+              <MappingFragment StoreEntitySet="BODEIndex">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Point4" ColumnName="Point4" />
+                <ScalarProperty Name="Point3" ColumnName="Point3" />
+                <ScalarProperty Name="Point2" ColumnName="Point2" />
+                <ScalarProperty Name="Point1" ColumnName="Point1" />
+                <ScalarProperty Name="VAriable" ColumnName="VAriable" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHQs">
+            <EntityTypeMapping TypeName="PTS_AmithaModel.PHQ">
+              <MappingFragment StoreEntitySet="PHQ">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

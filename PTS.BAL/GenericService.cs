@@ -1,6 +1,7 @@
 ﻿using PTS.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -29,6 +30,7 @@ namespace PTS.BAL
                 }
                 else
                 {
+                    //entities.Set<T>().AddOrUpdate(t);
                     entities.Entry(t).State = System.Data.Entity.EntityState.Modified;
                     entities.SaveChanges();
                 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace PTS.UI.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

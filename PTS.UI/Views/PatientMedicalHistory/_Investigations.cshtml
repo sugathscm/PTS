@@ -1,0 +1,12 @@
+﻿
+@model IEnumerable<PTS.UI.Models.BaseViewModel> 
+<div class="row m-10 print-report-data" id="printThis">
+    <div class="bg-actual-white col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+        @*@foreach (investigation in @Model.ToList())
+        {
+            @investigation.Name
+        }*@
+
+        @Model.ToList()
+    </div>
+</div>

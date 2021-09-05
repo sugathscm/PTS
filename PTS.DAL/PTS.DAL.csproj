@@ -62,20 +62,73 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BODEIndex.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CATScore.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CATScoreIntepretation.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comorbidity.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Complication.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COPDPSQuestion.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COPDPSQuestionAnswer.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExacerbationHistory.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FamilyHistory.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FEV1Staging.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Gender.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GOLDFEV1Staging.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Investigation.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestigationType.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MaritialStatu.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mMRCGrade.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Patient.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PatientClinicDay.cs">
+    <Compile Include="PatientInvestigation.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMedicalHistory.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMHCatScore.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHQ.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicalExamination.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,7 +147,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PTS_AmithaModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="SmokingHistory.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Title.cs">
+      <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VaccinationHistory.cs">
       <DependentUpon>PTS_AmithaModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

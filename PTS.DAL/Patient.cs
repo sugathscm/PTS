@@ -17,7 +17,9 @@ namespace PTS.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.PatientClinicDays = new HashSet<PatientClinicDay>();
+            this.PatientInvestigations = new HashSet<PatientInvestigation>();
+            this.PatientMedicalHistories = new HashSet<PatientMedicalHistory>();
+            this.PatientMHCatScores = new HashSet<PatientMHCatScore>();
         }
     
         public int Id { get; set; }
@@ -36,14 +38,22 @@ namespace PTS.DAL
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string City { get; set; }
-        public string Desgnation { get; set; }
+        public string Designation { get; set; }
         public string EmergencyContactName { get; set; }
         public string EmergencyContactNo { get; set; }
+        public string ClinicDays { get; set; }
+        public string ClinicTime { get; set; }
+        public string CodePrefix { get; set; }
+        public Nullable<int> CodeNumber { get; set; }
     
         public virtual Gender Gender { get; set; }
         public virtual MaritialStatu MaritialStatu { get; set; }
         public virtual Title Title { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientClinicDay> PatientClinicDays { get; set; }
+        public virtual ICollection<PatientInvestigation> PatientInvestigations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatientMedicalHistory> PatientMedicalHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatientMHCatScore> PatientMHCatScores { get; set; }
     }
 }

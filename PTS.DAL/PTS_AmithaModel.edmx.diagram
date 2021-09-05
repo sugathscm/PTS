@@ -4,25 +4,53 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f8378f291c35424b8e60ac8a07cb436b" Name="Diagram1">
-        <EntityTypeShape EntityType="PTS_AmithaModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetRole" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUser" Width="1.5" PointX="8" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.Gender" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.MaritialStatu" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.Patient" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.Title" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="PTS_AmithaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="PTS_AmithaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_Gender" ManuallyRouted="false" />
-        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_MaritialStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_Title" ManuallyRouted="false" />
-        <AssociationConnector Association="PTS_AmithaModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PTS_AmithaModel.PatientClinicDay" Width="1.5" PointX="5.25" PointY="7.125" />
-        <AssociationConnector Association="PTS_AmithaModel.FK_PatientClinicDay_Patient" />
-      </Diagram>
+      <Diagram DiagramId="f8378f291c35424b8e60ac8a07cb436b" Name="Diagram1" ZoomLevel="58">
+        <EntityTypeShape EntityType="PTS_AmithaModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetRole" Width="1.5" PointX="5.75" PointY="3.5" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="4.625" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="2" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.AspNetUser" Width="1.5" PointX="8" PointY="2.375" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Comorbidity" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Complication" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.FamilyHistory" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Gender" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.MaritialStatu" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.mMRCGrade" Width="1.5" PointX="9.75" PointY="7.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.PhysicalExamination" Width="1.5" PointX="8.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.SmokingHistory" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Title" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.VaccinationHistory" Width="1.5" PointX="10.75" PointY="10.75" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PTS_AmithaModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.CATScore" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.PatientMHCatScore" Width="1.5" PointX="14.625" PointY="3.375" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientMHCatScore_CATScore" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.ExacerbationHistory" Width="1.5" PointX="12.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Investigation" Width="1.5" PointX="3.375" PointY="13.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.PatientInvestigation" Width="1.5" PointX="13.375" PointY="9.75" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientInvestigation_Investigation" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.InvestigationType" Width="1.5" PointX="1.125" PointY="15" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Investigation_InvestigationType" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.PatientMedicalHistory" Width="1.5" PointX="16" PointY="6.5" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientMedicalHistory_mMRCGrade" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientMedicalHistory_SmokingHistory" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.Patient" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_Gender" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_MaritialStatus" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_Patient_Title" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientInvestigation_Patient" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientMedicalHistory_Patient" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_PatientMHCatScore_Patient" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.CATScoreIntepretation" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.FEV1Staging" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.COPDPSQuestion" Width="1.5" PointX="9.375" PointY="14" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.COPDPSQuestionAnswer" Width="1.5" PointX="11.625" PointY="13.875" />
+        <AssociationConnector Association="PTS_AmithaModel.FK_COPDPSQuestionAnswer_COPDPSQuestion" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.GOLDFEV1Staging" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.BODEIndex" Width="1.5" PointX="3.375" PointY="16.75" />
+        <EntityTypeShape EntityType="PTS_AmithaModel.PHQ" Width="1.5" PointX="16.375" PointY="0.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
